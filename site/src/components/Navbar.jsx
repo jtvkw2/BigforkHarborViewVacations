@@ -26,26 +26,28 @@ function ResponsiveAppBar({pages}) {
     <AppBar color = 'transparent'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <CabinIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <CabinIcon 
+            sx={{ display: { xs: 'none', md: 'flex', ml: 0}}} 
+          />
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
+              ml: 3,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.2rem',
               color: 'black',
               textDecoration: 'none',
             }}
           >
-            BFHVV
+            BigFork Harbor View Vacations
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none'} }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -61,12 +63,12 @@ function ResponsiveAppBar({pages}) {
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: 'right',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -88,7 +90,7 @@ function ResponsiveAppBar({pages}) {
           </Box>
           <CabinIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
-            variant="h5"
+            variant="h6"
             noWrap
             component="a"
             href="/"
@@ -98,19 +100,19 @@ function ResponsiveAppBar({pages}) {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.2rem',
               color: 'black',
               textDecoration: 'none',
             }}
           >
-            BFHVV
+            BigFork Harbor View Vacations
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block' }}
                 component="a"
                 href={page.path}
               >
