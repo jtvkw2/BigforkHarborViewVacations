@@ -22,97 +22,70 @@ function ResponsiveAppBar({pages}) {
     setAnchorElNav(null);
   };
 
-  return (
-    <AppBar color = 'transparent'>
+return (
+    <AppBar color='transparent'>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <CabinIcon 
-            sx={{ display: { xs: 'none', md: 'flex', ml: 0}}} 
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              ml: 3,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.2rem',
-              color: 'black',
-              textDecoration: 'none',
-            }}
-          >
-            BigFork Harbor View Vacations
-          </Typography>
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}> {/* <-- Adjusted here */}
+          {/* Desktop Display */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+            <CabinIcon />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                ml: 2, 
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.15rem', // slightly reduced letter spacing
+                color: 'black',
+                textDecoration: 'none',
+              }}
+            >
+              BigFork Harbor View Vacations
+            </Typography>
+          </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none'} }}>
+          {/* Mobile Display */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems: 'center' }}>
+            <CabinIcon />
+            <Typography
+              variant="subtitle1"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                ml: 2, 
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.15rem',
+                color: 'black',
+                textDecoration: 'none',
+              }}
+            >
+              BigFork
+            </Typography>
             <IconButton
               size="large"
-              aria-label="account of current user"
+              aria-label="menu"
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
+              sx={{ ml: 'auto' }} // push to right
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography 
-                    textAlign="center" 
-                    component="a"
-                    href={page.path}>
-                        {page.name}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
-          <CabinIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.2rem',
-              color: 'black',
-              textDecoration: 'none',
-            }}
-          >
-            BigFork Harbor View Vacations
-          </Typography>
+
+          {/* Desktop menu items */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+                sx={{ mx: 1, color: 'black' }}
                 component="a"
                 href={page.path}
               >
@@ -120,6 +93,37 @@ function ResponsiveAppBar({pages}) {
               </Button>
             ))}
           </Box>
+
+          {/* Mobile menu items (in a dropdown) */}
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorElNav}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElNav)}
+            onClose={handleCloseNavMenu}
+            sx={{
+              display: { xs: 'block', md: 'none' },
+            }}
+          >
+            {pages.map((page) => (
+              <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                <Typography 
+                  textAlign="center" 
+                  component="a"
+                  href={page.path}>
+                    {page.name}
+                </Typography>
+              </MenuItem>
+            ))}
+          </Menu>
         </Toolbar>
       </Container>
     </AppBar>
