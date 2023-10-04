@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import CabinImg1 from '/cabin1/1.webp'
-import CabinImg2 from '/cabin1/2.webp'
+import CabinImg2 from '/cabin2/1.webp'
 
 function Home() {
   return (
@@ -31,7 +31,7 @@ function Home() {
         <Box display="flex" justifyContent="center" flexWrap="wrap">
           {[
             { img: CabinImg1, title: 'Beautiful Marina Cay Condo on the water', description: 'Entire condo in Bigfork, Montana', path: '/marina-cay' },
-            { img: CabinImg2, title: 'Cabin 2', description: 'Perfect for families, come relax and explore', path: '/flathead-lake' }
+            { img: CabinImg2, title: 'Luxury Condo on Flathead Lake', description: 'Entire home in Bigfork, Montana', path: '/flathead-lake' }
           ].map((cabin, idx) => (
             <Paper
               key={idx}

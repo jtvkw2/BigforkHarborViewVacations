@@ -1,13 +1,28 @@
 // CabinPage.jsx
 import * as React from 'react';
 import {
-  Container, Box, Typography, Button, Paper, Divider, Avatar, Rating
+  Container, Box, Typography, Button, Paper, Card, CardContent, Grid, Divider, Avatar, Rating
 } from '@mui/material';
+import Slider from 'react-slick';
 import Lightbox from "yet-another-react-lightbox";
+import SleepCard from '../components/SleepCard';
 import Inline from "yet-another-react-lightbox/plugins/inline";
 import "yet-another-react-lightbox/styles.css";
+import PriceCard from '../components/PriceCard'
+import Contact from '../pages/contact'
+
 
 function CabinPage({ cabin }) {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    centerMode: false,
+  };
+
   const [open, setOpen] = React.useState(false);
   const [index, setIndex] = React.useState(0);
 
@@ -58,24 +73,37 @@ function CabinPage({ cabin }) {
             controller={{ closeOnPullDown: true, closeOnBackdropClick: true }}
           />
         </Box>
+        
+        <Grid container spacing={2}>
+          <Grid item xs={9}>
+            <Box mt={4}>
+              <Typography variant="h2" textAlign={'left'}>{cabin.title}</Typography>
+              <Typography variant="h4" textAlign={'left'}>{cabin.subtitle}</Typography>
+              <Box display="flex" alignItems="center" mt={3} mb={2}>
+                <Rating value={cabin.rating} readOnly />
+                <Typography ml={3}>{cabin.reviews} reviews</Typography>
+              </Box>
+              <Typography variant="h6" textAlign={'left'} fontWeight={500}>
+                {cabin.num_guests + " guests · " + cabin.num_bedrooms + " bedrooms · " + cabin.num_beds + " beds · " + cabin.num_baths + " baths"}
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={3}>
+            <Box display="flex" justifyContent="center" alignItems="center" height="100%" mt={2}>
+              <PriceCard pricePerNight={cabin.amount_per_night} />
+            </Box>
+          </Grid>
+        </Grid>
 
-        <Box mt={4}>
-          <Typography variant="h4">{cabin.title}</Typography>
-          <Box display="flex" alignItems="center" mt={1}>
-            <Rating value={cabin.rating} readOnly />
-            <Typography ml={1}>{cabin.reviews} reviews</Typography>
-          </Box>
-        </Box>
+        <Divider sx={{mt: 5, mb: 5}}/>
 
-        <Divider mt={2} mb={2} />
-
-        <Typography variant="h6">About this space</Typography>
+        <Typography variant="h4" textAlign={'left'}>About this space</Typography>
         <Typography variant="body1" mt={2}>
           {cabin.description}
         </Typography>
 
         <Box mt={4}>
-          <Typography variant="h6">Amenities</Typography>
+          <Typography variant="h4" textAlign={'left'}>Amenities</Typography>
           <Box mt={2} display="flex" flexWrap="wrap">
             {cabin.amenities.map((amenity, index) => (
               <Box key={index} mr={2} mb={2}>
@@ -87,19 +115,28 @@ function CabinPage({ cabin }) {
           </Box>
         </Box>
 
+        <Divider mt={2} mb={2} />
+
         <Box mt={4}>
-          <Typography variant="h6">Host</Typography>
+          <Typography variant="h4" mb={2} textAlign={'left'}>Where You'll Sleep</Typography>
+          <Slider {...settings}>
+            {cabin.sleepingArrangements.map((room, idx) => (
+              <SleepCard key={idx} room={room} />
+            ))}
+          </Slider>
+        </Box>
+
+        <Divider mt={5} mb={5} />
+        
+        <Box mt={4}>
+          <Typography variant="h6" textAlign={'left'}>Host</Typography>
           <Box display="flex" alignItems="center" mt={2}>
             <Avatar src={cabin.hostImage} />
             <Typography ml={2}>{cabin.hostName}</Typography>
           </Box>
         </Box>
 
-        <Box mt={4}>
-          <Button variant="contained" color="primary" size="large" fullWidth>
-            Book Now
-          </Button>
-        </Box>
+        <Contact />
       </Container>
     </div>
   );

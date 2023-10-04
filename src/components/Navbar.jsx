@@ -23,7 +23,7 @@ function ResponsiveAppBar({pages}) {
   };
 
 return (
-    <AppBar color='transparent'>
+    <AppBar>
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}> {/* <-- Adjusted here */}
           {/* Desktop Display */}
